@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Sakura Zen Room VR - Quest 3</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <!-- Post-processing per l'alone morbido dei LED (Bloom) -->
+    <script src="https://unpkg.com/aframe-Effects/dist/aframe-effects.min.js"></script>
+  </head>
+  <body>
+    <a-scene 
+      renderer="antialias: true; colorManagement: true; physicallyCorrectLights: true; exposure: 1.15"
+      background="color: #240d1b" 
+      fog="type: exponential; color: #331428; density: 0.045">
+
+      <!-- Caricamento del modello 3D generato in Blender -->
+      <a-assets timeout="30000">
+        <a-asset-item id="zen-room" src="./stanza.glb"></a-asset-item>
+      </a-assets>
+
+      <!-- Il tuo ambiente 3D completo (ruotato e allineato alle coordinate WebXR) -->
+      <a-entity gltf-model="#zen-room" position="0 0 0" rotation="0 0 0"></a-entity>
+
+      <!-- Illuminazione diffusa cinematografica Rosa/Ciano/Oro -->
+      <a-light type="ambient" color="#ffcce6" intensity="0.85"></a-light>
+      
+      <!-- Luce morbida globale dal soffitto del giardino -->
+      <a-light type="point" color="#ff80bf" intensity="2.5" position="0 3.6 -1.5" distance="14" decay="1.5"></a-light>
+      
+      <!-- Riflessi Ciano delle strisce LED a pavimento -->
+      <a-light type="point" color="#00ffe5" intensity="1.8" position="-1.8 0.4 1.2" distance="4.5"></a-light>
+      <a-light type="point" color="#00ffe5" intensity="1.8" position="1.8 0.4 1.2" distance="4.5"></a-light>
+      <a-light type="point" color="#00ffe5" intensity="1.6" position="0 0.4 -2.2" distance="6.0"></a-light>
+
+      <!-- Luce calda dal basso per il bonsai principale -->
+      <a-light type="point" color="#ffaa44" intensity="1.5" position="0 0.35 -0.35" distance="2.5"></a-light>
+
+      <!-- Punto di vista: Seduta sul Tatami guardando il giardino -->
+      <a-entity position="0 0 2.2" rotation="0 0 0">
+        <a-camera position="0 1.1 0" look-controls wasd-controls="acceleration: 15"></a-camera>
+      </a-entity>
+
+    </a-scene>
+  </body>
+</html>
